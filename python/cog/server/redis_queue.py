@@ -1,5 +1,6 @@
 import io
 import json
+import multiprocessing
 from pathlib import Path
 from typing import Optional
 import signal
@@ -333,6 +334,7 @@ def _queue_worker_from_argv(
 
 
 if __name__ == "__main__":
+    multiprocessing.set_start_method("spawn")
     predictor = load_predictor()
 
     worker = _queue_worker_from_argv(predictor, *sys.argv[1:])
